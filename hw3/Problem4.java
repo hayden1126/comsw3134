@@ -4,37 +4,48 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Problem4 {
-    public static <T> void printReverseNTime(LinkedList<T> list) {
+    public static <T> void printReverseNTime(Node<T> head) {
         String output = "";
+        Node<T> currNode = head;
 
-       for (T item : list) {
-            output = String.format("%s\n%s", item, output);
-        }
+        if (head != null) {output += head.data.toString(); }
+        while (currNode.next != null) {
+            currNode = currNode.next;
+            output = String.format("%s\n%s", currNode.data.toString(), output);
+        } // Adds each item to the front of the string
 
         System.out.println(output.strip());
     }
 
-    public static <T> void printReverse1Space(List<T> list) {
-        
-        if (list.isEmpty()) { return; }
-        
-        T endMarker = null;
+    class Node <T> {
+        T data;
+        Node<T> next;
 
-        while (!list.get(0).equals(endMarker)) {
-            T current = null;
+        Node(T data)
+        {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
-            for (T item : list) {
-                if (endMarker == null) {
-                    current = item;
-                } else if (!item.equals(endMarker)) {
-                    current = item;
+    public static <T> void printReverse1Space(Node<T> head) {
+        
+        if (head == null) { return; }
+        
+        Node<T> endMarker = null;
+
+        while (head != endMarker) {
+            Node<T> currNode = head;
+            while (currNode.next != null) {
+                if (endMarker == null || currNode != endMarker) {
+                    currNode = currNode.next;
                 } else {
                     break;
                 }
             }
 
-            System.out.println(current);
-            endMarker = current;
+            System.out.println(currNode.data.toString());
+            endMarker = currNode;
         }
     }
 

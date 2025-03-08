@@ -7,7 +7,7 @@ public class TwoStacksTest {
         for (int i=0; i<10; i++) {
             myStacks.push1(i);
         }
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<10; i++) {  
             myStacks.push2(i);
         }
         for (int i=0; i<10; i++) {

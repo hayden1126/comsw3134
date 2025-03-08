@@ -29,7 +29,7 @@ public static <T> void printLots(List<T> L, List<Integer> P) {
 ## Problem 2
 ![](ex3_8.png)
 
-*a)* __Answer:__ `theSize` was declared and initialized to an Integer with value `lst.size() / 2` before entering the `for` loop.
+*a)* __Answer:__ `lst.size()` changes during the loop, therefore `theSize` is initialized before the loop as the original `lst.size()/2`.
 
 *b)* __Answer:__ $O(N^2)$
 
@@ -39,7 +39,7 @@ public static <T> void printLots(List<T> L, List<Integer> P) {
 
  Because `lst.size()` is $O(N)$, the `for` loop is $O(\text{theSize})$, and `lst.remove(0)` is $O(1)$ since there is no need to shift elements when removing the first.
 
-*d)* __Answer:__ No
+*d)* __Answer:__ No, you still iterate through the list in $O(N)$ or even more.
 
 
 ## Problem 3
@@ -53,7 +53,7 @@ class TwoStacks<T> {
 
     @SuppressWarnings("unchecked")
     public TwoStacks() {
-        ensureCapacity(DEFAULT_CAPACITY);
+        myItems = (T[]) new Object[DEFAULT_CAPACITY];
         mySize1 = 0;
         mySize2 = 0;
     }
@@ -61,61 +61,59 @@ class TwoStacks<T> {
     @SuppressWarnings("unchecked")
     public void ensureCapacity( int newCapacity )
     {
-        if( newCapacity < topIndex1()+1 && newCapacity < topIndex2()+1 ) {
+        if (newCapacity < size1() + size2()) {
             return;
         }
 
         T [] old = myItems;
+        int oldCapacity = old.length;
         myItems = (T []) new Object[ newCapacity ];
 
-        for (int i=0; i<=topIndex1(); i+=2) {
+        for (int i=0; i<size1(); i++) {
             myItems[i] = old[i];
         }
-
-        for (int i=1; i<=topIndex2(); i+=2) {
-            myItems[i] = old[i];
+        for (int i=1; i<=size2(); i++) {
+            myItems[newCapacity-i] = old[oldCapacity-i];
         }
 
     }
 
     public void push1(T x) {
 
-        if( myItems.length >= topIndex1() ) {
+        if( myItems.length == size1() + size2()) {
             ensureCapacity( myItems.length * 2 + 1 );
         }
-
-        mySize1++; 
-        myItems[topIndex1()] = x; 
+        myItems[size1()] = x; 
+        mySize1++;
     }
 
     public void push2(T x) {
 
-        if( myItems.length >= topIndex2() ) {
+        if( myItems.length == size1() + size2()) {
             ensureCapacity( myItems.length * 2 + 1 );
         }
-
+        myItems[myItems.length-size2()-1] = x;  
         mySize2++;
-        myItems[topIndex2()] = x;  
     }
 
     public T pop1() {
         mySize1--;
-        return myItems[topIndex1()+2];
+        return myItems[size1()];
     }
 
     public T pop2() {
         mySize2--;
-        return myItems[topIndex2()+2];
+        return myItems[myItems.length-size2()-1];
     }
 
     public T peek1() {
         if (isEmpty1()) { return null; } 
-        return myItems[topIndex1()];
+        return myItems[size1()-1];
     }
 
     public T peek2() {
         if (isEmpty2()) { return null; } 
-        return myItems[topIndex2()];
+        return myItems[myItems.length-size2()];
     }
 
     public boolean isEmpty1() {
@@ -133,16 +131,6 @@ class TwoStacks<T> {
     public int size2() {
         return mySize2;
     }
-
-    private int topIndex1() {
-        if (isEmpty1()) { return -2; }
-        return (size1()-1)*2;
-    }
-
-    private int topIndex2() {
-        if (isEmpty2()) { return -1; }
-        return (size2()*2)-1;
-    }
 }
 ```
 
@@ -153,12 +141,15 @@ class TwoStacks<T> {
 
 __Answer__: $O(N)$ Extra space
 ```Java
-public static <T> void printReverseNTime(LinkedList<T> list) {
+public static <T> void printReverseNTime(Node<T> head) {
     String output = "";
-
-    for (T item : list) {
-        output = String.format("%s\n%s", item, output);
-    }
+    Node<T> currNode = head;
+    
+    if (head != null) {output += head.data.toString(); }
+    while (currNode.next != null) {
+        currNode = currNode.next;
+        output = String.format("%s\n%s", currNode.data.toString(), output);
+    } // Adds each item to the front of the string
 
     System.out.println(output.strip());
 }
@@ -168,27 +159,24 @@ Write another iterative algorithm in Java-like pseudocode for printing a singly 
 
 __Answer__: $(O(\frac{N(N+1)}{2})=)\space O(N^2)$ runtime
 ```Java
-public static <T> void printReverse1Space(List<T> list) {
+public static <T> void printReverse1Space(Node<T> head) {
     
-    if (list.isEmpty()) { return; }
+    if (head == null) { return; }
     
-    T endMarker = null;
+    Node<T> endMarker = null;
 
-    while (!list.get(0).equals(endMarker)) {
-        T current = null;
-
-        for (T item : list) {
-            if (endMarker == null) {
-                current = item;
-            } else if (!item.equals(endMarker)) {
-                current = item;
+    while (head != endMarker) {
+        Node<T> currNode = head;
+        while (currNode.next != null) {
+            if (endMarker == null || currNode != endMarker) {
+                currNode = currNode.next;
             } else {
                 break;
             }
         }
 
-        System.out.println(current);
-        endMarker = current;
+        System.out.println(currNode.data.toString());
+        endMarker = currNode;
     }
 }
 ```

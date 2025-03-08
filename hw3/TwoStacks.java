@@ -6,7 +6,7 @@ class TwoStacks<T> {
 
     @SuppressWarnings("unchecked")
     public TwoStacks() {
-        ensureCapacity(DEFAULT_CAPACITY);
+        myItems = (T[]) new Object[DEFAULT_CAPACITY];
         mySize1 = 0;
         mySize2 = 0;
     }
@@ -14,61 +14,59 @@ class TwoStacks<T> {
     @SuppressWarnings("unchecked")
     public void ensureCapacity( int newCapacity )
     {
-        if( newCapacity < topIndex1()+1 && newCapacity < topIndex2()+1 ) {
+        if (newCapacity < size1() + size2()) {
             return;
         }
 
         T [] old = myItems;
+        int oldCapacity = old.length;
         myItems = (T []) new Object[ newCapacity ];
 
-        for (int i=0; i<=topIndex1(); i+=2) {
+        for (int i=0; i<size1(); i++) {
             myItems[i] = old[i];
         }
-
-        for (int i=1; i<=topIndex2(); i+=2) {
-            myItems[i] = old[i];
+        for (int i=1; i<=size2(); i++) {
+            myItems[newCapacity-i] = old[oldCapacity-i];
         }
 
     }
 
     public void push1(T x) {
 
-        if( myItems.length >= topIndex1() ) {
+        if( myItems.length == size1() + size2()) {
             ensureCapacity( myItems.length * 2 + 1 );
         }
-
-        mySize1++; 
-        myItems[topIndex1()] = x; 
+        myItems[size1()] = x; 
+        mySize1++;
     }
 
     public void push2(T x) {
 
-        if( myItems.length >= topIndex2() ) {
+        if( myItems.length == size1() + size2()) {
             ensureCapacity( myItems.length * 2 + 1 );
         }
-
+        myItems[myItems.length-size2()-1] = x;  
         mySize2++;
-        myItems[topIndex2()] = x;  
     }
 
     public T pop1() {
         mySize1--;
-        return myItems[topIndex1()+2];
+        return myItems[size1()];
     }
 
     public T pop2() {
         mySize2--;
-        return myItems[topIndex2()+2];
+        return myItems[myItems.length-size2()-1];
     }
 
     public T peek1() {
         if (isEmpty1()) { return null; } 
-        return myItems[topIndex1()];
+        return myItems[size1()-1];
     }
 
     public T peek2() {
         if (isEmpty2()) { return null; } 
-        return myItems[topIndex2()];
+        return myItems[myItems.length-size2()];
     }
 
     public boolean isEmpty1() {
@@ -85,15 +83,5 @@ class TwoStacks<T> {
 
     public int size2() {
         return mySize2;
-    }
-
-    private int topIndex1() {
-        if (isEmpty1()) { return -2; }
-        return (size1()-1)*2;
-    }
-
-    private int topIndex2() {
-        if (isEmpty2()) { return -1; }
-        return (size2()*2)-1;
     }
 }
