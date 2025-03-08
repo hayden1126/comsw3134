@@ -1,0 +1,43 @@
+
+Cubic: i= 1 ; runtime= 1880
+Cubic: i= 2 ; runtime= 1370
+Cubic: i= 3 ; runtime= 1270
+Cubic: i= 4 ; runtime= 1980
+Cubic: i= 5 ; runtime= 3620
+Cubic: i= 6 ; runtime= 5190
+Cubic: i= 7 ; runtime= 6370
+Cubic: i= 8 ; runtime= 33431
+Cubic: i= 9 ; runtime= 21870
+Cubic: i= 10 ; runtime= 29570
+
+
+Exp: i= 1 ; runtime= 4810
+Exp: i= 2 ; runtime= 6020
+Exp: i= 3 ; runtime= 1740
+Exp: i= 4 ; runtime= 2840
+Exp: i= 5 ; runtime= 4780
+Exp: i= 6 ; runtime= 7931
+Exp: i= 7 ; runtime= 15070
+Exp: i= 8 ; runtime= 30470
+Exp: i= 9 ; runtime= 62210
+Exp: i= 10 ; runtime= 147572
+
+
+Constant: i= 1 ; runtime= 4920
+Constant: i= 2 ; runtime= 540
+Constant: i= 3 ; runtime= 500
+Constant: i= 4 ; runtime= 600
+Constant: i= 5 ; runtime= 520
+Constant: i= 6 ; runtime= 580
+Constant: i= 7 ; runtime= 630
+Constant: i= 8 ; runtime= 440
+Constant: i= 9 ; runtime= 530
+Constant: i= 10 ; runtime= 580
+
+Overall all three have a runtime corresponding similar to their cost function/time complexity.
+The first run of each have a much longer runtime, probably due to compilation.
+The cubic method roughly follows a cubic trend plus a constant extra runtime.
+Same for the Exp method.
+The constant method gives a runtime fluctuating between 400-650 nanoseconds.
+
+These discrepancies are mostly likely due to noise and memory allocation delays.
