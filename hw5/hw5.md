@@ -121,7 +121,7 @@ Assume that $\sum_{i=1}^{M} 2^{-d_i} \le 1$ is true for all trees of $h \le k$ f
 
 Consider the binary tree $t_1$ with $h = k+1$:
 
-![Figure 5.1 Tree t1](ans5.png){height=120}
+![](ans5.png){height=120}
 
 The subtrees $A$ and $B$ will have their heights $\le k$, so the assumption earlier works on subtrees $A$ and $B$.
 
@@ -135,13 +135,37 @@ $$
 \begin{aligned}
 \therefore \sum_{i=1}^{M} 2^{-d_i} &= \sum_{i=1}^{M} 2^{-(p_i+1)} + \sum_{i=1}^{M} 2^{-(q_i+1)} \\
 \sum_{i=1}^{M} 2^{-d_i} &= \frac{1}{2} \sum_{i=1}^{M} 2^{-p_i} + \frac{1}{2} \sum_{i=1}^{M} 2^{-q_i} \\
-\sum_{i=1}^{M} 2^{-d_i} &\le \frac{1}{2} (1 + 1) \\
-\therefore \sum_{i=1}^{M} 2^{-d_i} &\le 1
+\therefore \sum_{i=1}^{M} 2^{-d_i} &\le \frac{1}{2} (1 + 1) = 1\\
 \end{aligned}
 $$
 
 If the condition is true for any binary tree of height $k \ge 0$, it is true for any binary tree of height $k+1$. Since it is true for height $h = -1$ and $0$, therefore it is true for all heights and so true for all binary trees by the principle of mathematical induction.
 
+The equality $\sum_{i=1}^{M} 2^{-d_i} = 1$ is true if and only if the tree is full. Proof:
+
+Base case: Height $h = 0$
+
+The tree only contains the root which is a leaf node:
+
+$$
+\therefore \sum_{i=1}^{M} 2^{-d_i} = 2^{-d_1} = 1
+$$
+
+Assume that $\sum_{i=1}^{M} 2^{-d_i} = 1$ is true for all *full* binary trees of $h \le k$ for $k \ge 0$.
+
+Consider a full binary tree $t_2$ of height $h = k+1$ with the same layout as $t_1$. Subtrees $A$ and $B$ are non-empty full binary trees of height $h \le k$ and so the assumption works for them.
+
+By the same logic as the previous induction, $A$ and $B$ would have $\sum_{i=1}^{M} 2^{-p_i} = 1$ and $\sum_{i=1}^{M} 2^{-q_i} = 1$ respectively; and their depths would be $p_1 + 1, p_2 + 1, ..., p_M + 1$ and $q_1 + 1, q_2 + 1, ..., q_M + 1$ relative to the root node respectively. 
+
+$$
+\begin{aligned}
+\therefore \sum_{i=1}^{M} 2^{-d_i} &= \sum_{i=1}^{M} 2^{-(p_i+1)} + \sum_{i=1}^{M} 2^{-(q_i+1)} \\
+\sum_{i=1}^{M} 2^{-d_i} &= \frac{1}{2} \sum_{i=1}^{M} 2^{-p_i} + \frac{1}{2} \sum_{i=1}^{M} 2^{-q_i} \\
+\therefore \sum_{i=1}^{M} 2^{-d_i} &= \frac{1}{2} (1 + 1) = 1
+\end{aligned}
+$$
+
+If the condition is true for any binary tree of height $k \ge 0$, it is true for any binary tree of height $k+1$. Since it is true for height $h = 0$, therefore it is true for all heights and so true for all binary trees by the principle of mathematical induction.
 
 \newpage
 
