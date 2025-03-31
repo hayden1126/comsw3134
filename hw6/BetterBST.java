@@ -8,7 +8,7 @@ public class BetterBST<T extends Comparable<? super T>> extends BinarySearchTree
 
     private int findHeight(BinaryNode<T> currNode) {
         if (currNode == null) {
-            return 0;
+            return -1;
         }
         return 1 + Math.max(findHeight(currNode.left), findHeight(currNode.right));
     }
