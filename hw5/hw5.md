@@ -127,7 +127,7 @@ The subtrees $A$ and $B$ will have their heights $\le k$, so the assumption earl
 
 Let $A$ have leaf nodes $a_1, a_2, a_3, ..., a_M$ at depths $p_1, p_2, p_3, ..., p_M$ relative to $A$; and $B$ have leaf nodes $b_1, b_2, b_3, ..., b_M$ at depths $q_1, q_2, q_3, ..., q_M$ relative to $B$ respectively.
 
-Then $\sum_{i=1}^{M} 2^{-p_i} \le 1$ and $\sum_{i=1}^{M} 2^{-q_i} \le 1$ 
+Then $\sum_{i=1}^{M} 2^{-p_i} \le 1$ and $\sum_{i=1}^{M} 2^{-q_i} \le 1$.
 
 Relative to the root node in $t_1$, the new depths of the leaf nodes are $p_1 + 1, p_2 + 1, ..., p_M + 1$ and $q_1 + 1, q_2 + 1, ..., q_M + 1$ respectively.
 
