@@ -103,8 +103,10 @@ public class BetterBST<T extends Comparable<? super T>> extends BinarySearchTree
 
         while (!qu.isEmpty()) {
             BinaryNode<T> currNode = qu.remove();
-            qu.add(currNode.left);
-            qu.add(currNode.right);
+            if (currNode.left != null)
+                qu.add(currNode.left);
+            if (currNode.right != null)
+                qu.add(currNode.right);
             result.add(currNode);
         }
         return result;
