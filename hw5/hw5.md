@@ -88,6 +88,7 @@ __Answer:__
 
 ![](ans4b.png){height=120}
 
+Postorder Traversal: A B C E F D
 
 \newpage
 
