@@ -1,4 +1,4 @@
-# Data Structures in Java - Homework 5
+# Data Structures in Java - Homework 7
 
 ## Problem 1
 
@@ -6,7 +6,7 @@
 
 __Answer:__
 
-![](ans1.png){height=250}
+![](ans1.png){height=200}
 
 ## Problem 2
 
@@ -14,6 +14,8 @@ __Answer:__
 __Use Table size of 23__
 
 __Answer:__
+
+Same for all (a), (b) and (c):
 
 ![](ans2.png){height=200}
 
@@ -85,9 +87,13 @@ Maximum is the larger child of the root.
 
 __b) Answer:__
 
-- Insert at the next available position on the bottom level. 
-- If its depth is even, percolate up through only the even levels when smaller than its grandparent, percolate up through only odd levels when larger than grandparents.
-- If its depth is odd, percolate up through only the odd levels when bigger than its grandparent, percolate up through only even levels when smaller than grandparents.
+- Insert at the next available left-most leaf position on the bottom level. 
+- If its depth is even: 
+    - While smaller than its grandparent, percolate up through only the even levels 
+    - while larger than grandparents, percolate up through only odd levels 
+- If its depth is odd, 
+    - While larger than its grandparent, percolate up through only the odd levels
+    - While smaller than grandparents, percolate up through only even levels
 
 
 ## Problem 6
@@ -96,12 +102,12 @@ __b) Answer:__
 
 ```
 Original: [3, 1, 4, 1, 5, 9, 2, 6, 5]
-Swap 1: [1, 3, 4, 1, 5, 9, 2, 6, 5]
-Swap 2: [1, 3, 4, 1, 5, 9, 2, 6, 5]
-Swap 3: [1, 1, 3, 4, 5, 9, 2, 6, 5]
-Swap 4: [1, 1, 3, 4, 5, 9, 2, 6, 5]
-Swap 5: [1, 1, 3, 4, 5, 9, 2, 6, 5]
-Swap 6: [1, 1, 2, 3, 4, 5, 9, 6, 5]
-Swap 7: [1, 1, 2, 3, 4, 5, 6, 9, 5]
+Swap 1: [1, 3 | 4, 1, 5, 9, 2, 6, 5]
+Swap 2: [1, 3, 4 | 1, 5, 9, 2, 6, 5]
+Swap 3: [1, 1, 3, 4 | 5, 9, 2, 6, 5]
+Swap 4: [1, 1, 3, 4, 5 | 9, 2, 6, 5]
+Swap 5: [1, 1, 3, 4, 5, 9 | 2, 6, 5]
+Swap 6: [1, 1, 2, 3, 4, 5, 9 | 6, 5]
+Swap 7: [1, 1, 2, 3, 4, 5, 6, 9 | 5]
 Swap 8: [1, 1, 2, 3, 4, 5, 5, 6, 9]
 ```
