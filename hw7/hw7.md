@@ -94,7 +94,7 @@ public void insert(Comparable item) {
     heap[size+1] = item; // assuming there is extra space
     size++;
     
-    int idx = size - 1;
+    int idx = size;
     if (idx == 1) return;
     int parentIdx = idx/2;
     int depth = (int) (Math.log(idx) / Math.log(2));
