@@ -91,7 +91,7 @@ Assuming heap is implemented in an array with extra space and the variable `size
 
 ```java
 public void insert(Comparable item) {
-    heap[size] = item; // assuming there is extra space
+    heap[size+1] = item; // assuming there is extra space
     size++;
     
     int idx = size - 1;
