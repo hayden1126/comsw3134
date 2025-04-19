@@ -27,12 +27,12 @@ Same for all (a), (b) and (c):
 
 __a) Answer:__
 
-![](ans3a.png)
+![](ans3a.png){height=300}
 
 
 __b) Answer:__
 
-![](ans3b.png)
+![](ans3b.png){height=250}
 
 \newpage
 
@@ -87,15 +87,8 @@ Maximum is the larger child of the root.
 
 __b) Answer:__
 
-- Insert at the next available left-most leaf position on the bottom level. 
-- If its depth is even: 
-    - While smaller than its grandparent, percolate up through only the even levels 
-    - while larger than parents, percolate up through only odd levels 
-- If its depth is odd, 
-    - While larger than its grandparent, percolate up through only the odd levels
-    - While smaller than grandparents, percolate up through only even levels
+Assuming heap is implemented in an array with extra space and the variable `size` is accessible through the class:
 
-Assuming heap is implemented in an array with extra space and variable `size` is accessible through the class.
 ```java
 public void insert(Comparable item) {
     heap[size] = item; // assuming there is extra space
@@ -107,18 +100,20 @@ public void insert(Comparable item) {
     int depth = (int) (Math.log(idx) / Math.log(2));
 
     if (isEvenLevel(idx)) {
-        if (item.compareTo(heap[parentIdx]) > 0) {
-            swap(idx, parentIdx);
-            percolateUpEven(parentIdx);
-        } else {
-            percolateUpOdd(idx);
+        if (item.compareTo(heap[parentIdx]) > 0) 
+        { // if item (even) is larger than parent (odd)
+            swap(idx, parentIdx); // swap them
+            percolateUpEven(parentIdx); // percolate the item up through odd levels
+        } else { // otherwise
+            percolateUpOdd(idx); // percolate up through even levels
         }
-    } else { // odd level
-        if (item.compareTo(heap[parentIdx]) > 0) {
-            swap(idx, parentIdx);
-            percolateUpEven(parentIdx);
-        } else {
-            percolateUpOdd(idx);
+    } else { // if item is at odd level
+        if (item.compareTo(heap[parentIdx]) < 0) 
+        { // if item (odd) is smaller than parent
+            swap(idx, parentIdx); // swap them
+            percolateUpEven(parentIdx); // percolate item up through even levels 
+        } else { // otherwise
+            percolateUpOdd(idx); // percolate up through odd levels
         }
     }
 }
