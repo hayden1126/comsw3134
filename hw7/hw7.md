@@ -32,7 +32,7 @@ __a) Answer:__
 
 __b) Answer:__
 
-![](ans3b.png){height=30}
+![](ans3b.png)
 
 \newpage
 
@@ -45,12 +45,12 @@ __Answer:__
 Breadth-first traversal method and incrementing counter.
 
 ```java
-public BinaryNode get(BinaryNode root, int i)
+public BinaryNode get(int i)
 {
     if (root == null || i < 1) return null;
 
     ArrayList<BinaryNode> queue = new ArrayList<BinaryNode>();
-    queue.add(root);
+    queue.add(root); // access to root through class
 
     int currPos = 0;
 
@@ -90,10 +90,40 @@ __b) Answer:__
 - Insert at the next available left-most leaf position on the bottom level. 
 - If its depth is even: 
     - While smaller than its grandparent, percolate up through only the even levels 
-    - while larger than grandparents, percolate up through only odd levels 
+    - while larger than parents, percolate up through only odd levels 
 - If its depth is odd, 
     - While larger than its grandparent, percolate up through only the odd levels
     - While smaller than grandparents, percolate up through only even levels
+
+Assuming heap is implemented in an array with extra space and variable `size` is accessible through the class.
+```java
+public void insert(Comparable item) {
+    heap[size] = item; // assuming there is extra space
+    size++;
+    
+    int idx = size - 1;
+    if (idx == 1) return;
+    int parentIdx = idx/2;
+    int depth = (int) (Math.log(idx) / Math.log(2));
+
+    if (isEvenLevel(idx)) {
+        if (item.compareTo(heap[parentIdx]) > 0) {
+            swap(idx, parentIdx);
+            percolateUpEven(parentIdx);
+        } else {
+            percolateUpOdd(idx);
+        }
+    } else { // odd level
+        if (item.compareTo(heap[parentIdx]) > 0) {
+            swap(idx, parentIdx);
+            percolateUpEven(parentIdx);
+        } else {
+            percolateUpOdd(idx);
+        }
+    }
+}
+
+```
 
 
 ## Problem 6
