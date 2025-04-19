@@ -103,9 +103,9 @@ public void insert(Comparable item) {
         if (item.compareTo(heap[parentIdx]) > 0) 
         { // if item (even) is larger than parent (odd)
             swap(idx, parentIdx); // swap them
-            percolateUpEven(parentIdx); // percolate the item up through odd levels
+            percolateUpOdd(parentIdx); // percolate the item up through odd levels
         } else { // otherwise
-            percolateUpOdd(idx); // percolate up through even levels
+            percolateUpEven(idx); // percolate up through even levels
         }
     } else { // if item is at odd level
         if (item.compareTo(heap[parentIdx]) < 0) 
