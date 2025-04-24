@@ -69,23 +69,6 @@ public class SpellChecker implements SpellCheckerInterface{
                 result.add(tmp);
             }
         }
-
         return result;
-    }
-
-    public static void main(String[] args) {
-        SpellChecker sc = new SpellChecker("words.txt");
-
-        List<String> incorrect = sc.getIncorrectWords("test.txt");
-
-        for (String i : incorrect) {
-            System.out.println("INCORRECT WORD: " + i);
-            Set<String> suggestions = sc.getSuggestions(i);
-
-            for (String s : suggestions) {
-                System.out.println(s);
-            }
-            System.out.println("");
-        }
     }
 }
