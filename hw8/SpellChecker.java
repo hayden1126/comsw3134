@@ -15,7 +15,7 @@ public class SpellChecker implements SpellCheckerInterface{
                 dict.add(word);
             }
         } catch (FileNotFoundException e) {
-            
+            System.out.println("File not found: " + filename);
         }
     }
 
@@ -30,7 +30,7 @@ public class SpellChecker implements SpellCheckerInterface{
                 }
             }
         } catch (FileNotFoundException e) {
-
+            System.out.println("File not found: " + filename);
         }
 
         return result;
