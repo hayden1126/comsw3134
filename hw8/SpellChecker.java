@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.File;
 
-public class SpellChecker {
+public class SpellChecker implements SpellCheckerInterface{
 
     private HashSet<String> dict;
 
